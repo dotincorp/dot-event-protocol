@@ -27,6 +27,20 @@ export interface HttpBatchSinkOptions {
      * device that never reconnects.
      */
     readonly maxQueueSize?: number;
+    /**
+     * Key the gateway accepts for this product, sent as a bearer token.
+     *
+     * It is bound to one app there, so a key cannot file events under another
+     * product's name. Omit it and the request carries no key: a gateway that
+     * requires one answers 401 and the batch is retried, not lost.
+     *
+     * A key shipped to a browser is not a secret -- anyone can read it from the
+     * network tab. It raises the bar from "anyone who finds the URL" to "anyone
+     * who opens the app", which is worth having and is not authentication. A
+     * product whose events pass through a server of its own should keep the key
+     * there and leave this unset in the browser.
+     */
+    readonly ingestKey?: string;
     /** Called for delivery failures and drops. Never rethrown into the product. */
     readonly onError?: (error: unknown) => void;
     /** Injected for tests. */
@@ -44,6 +58,7 @@ export declare class HttpBatchEventSink implements EventSink {
     private readonly maxBatchSize;
     private readonly flushIntervalMs;
     private readonly maxQueueSize;
+    private readonly headers;
     private readonly onError;
     private readonly setTimeoutImpl;
     private readonly clearTimeoutImpl;

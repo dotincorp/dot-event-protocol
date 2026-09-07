@@ -9,7 +9,7 @@ Dot 제품·서비스·기기가 공유하는 이벤트 계약. 이벤트 이름
 ## 설치
 
 ```json
-"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.1.1"
+"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.2.0"
 ```
 
 태그로 고정한다. 브랜치(`#dev`, `#main`)를 참조하면 설치할 때마다 내용이 달라진다.
@@ -21,6 +21,22 @@ import { createHttpSink } from "@dot/event-protocol/transport";
 ```
 
 **런타임 의존성이 없다.** 이 패키지를 설치해도 다른 패키지가 따라오지 않는다.
+
+## 수집 키
+
+게이트웨이가 키를 요구하면 `ingestKey` 로 넘긴다. bearer 토큰으로 실린다.
+
+```js
+const sink = createHttpSink(endpoint, { ingestKey: process.env.DOT_INGEST_KEY });
+```
+
+키는 앱에 묶여 있어 다른 제품 이름으로는 이벤트를 넣을 수 없다.
+넘기지 않으면 요청에 키가 실리지 않고, 키를 요구하는 게이트웨이는 401 을 준다 —
+그때 배치는 유실되지 않고 재시도 대기열에 남는다.
+
+**브라우저에 실린 키는 비밀이 아니다.** 네트워크 탭에서 읽힌다.
+「URL 을 찾은 누구나」에서 「앱을 연 누구나」로 문턱을 올릴 뿐 인증이 아니다.
+자기 서버를 거쳐 이벤트를 보내는 제품은 키를 서버에 두고 브라우저에는 넘기지 않는 편이 낫다.
 
 ## `dist/`가 저장소에 있는 이유
 

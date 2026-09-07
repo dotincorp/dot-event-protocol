@@ -28,6 +28,20 @@ export interface HttpBatchSinkOptions {
    * device that never reconnects.
    */
   readonly maxQueueSize?: number;
+  /**
+   * Key the gateway accepts for this product, sent as a bearer token.
+   *
+   * It is bound to one app there, so a key cannot file events under another
+   * product's name. Omit it and the request carries no key: a gateway that
+   * requires one answers 401 and the batch is retried, not lost.
+   *
+   * A key shipped to a browser is not a secret -- anyone can read it from the
+   * network tab. It raises the bar from "anyone who finds the URL" to "anyone
+   * who opens the app", which is worth having and is not authentication. A
+   * product whose events pass through a server of its own should keep the key
+   * there and leave this unset in the browser.
+   */
+  readonly ingestKey?: string;
   /** Called for delivery failures and drops. Never rethrown into the product. */
   readonly onError?: (error: unknown) => void;
   /** Injected for tests. */
@@ -53,6 +67,7 @@ export class HttpBatchEventSink implements EventSink {
   private readonly maxBatchSize: number;
   private readonly flushIntervalMs: number;
   private readonly maxQueueSize: number;
+  private readonly headers: Readonly<Record<string, string>>;
   private readonly onError: ((error: unknown) => void) | undefined;
   private readonly setTimeoutImpl: typeof setTimeout;
   private readonly clearTimeoutImpl: typeof clearTimeout;
@@ -63,6 +78,13 @@ export class HttpBatchEventSink implements EventSink {
     this.maxBatchSize = options.maxBatchSize ?? DEFAULTS.maxBatchSize;
     this.flushIntervalMs = options.flushIntervalMs ?? DEFAULTS.flushIntervalMs;
     this.maxQueueSize = options.maxQueueSize ?? DEFAULTS.maxQueueSize;
+    // Built once: an empty or blank key is the same as no key, so a
+    // half-configured product does not send `Bearer ` and get a confusing 401.
+    const key = options.ingestKey?.trim();
+    this.headers = {
+      "content-type": "application/json",
+      ...(key ? { authorization: `Bearer ${key}` } : {}),
+    };
     this.onError = options.onError;
     this.setTimeoutImpl = options.setTimeoutImpl ?? setTimeout;
     this.clearTimeoutImpl = options.clearTimeoutImpl ?? clearTimeout;
@@ -126,7 +148,7 @@ export class HttpBatchEventSink implements EventSink {
     try {
       const response = await this.fetchImpl(this.endpoint, {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: this.headers,
         body: JSON.stringify({ events: batch }),
         credentials: "omit",
         keepalive: true,

@@ -14,6 +14,7 @@ export class HttpBatchEventSink {
     maxBatchSize;
     flushIntervalMs;
     maxQueueSize;
+    headers;
     onError;
     setTimeoutImpl;
     clearTimeoutImpl;
@@ -23,6 +24,13 @@ export class HttpBatchEventSink {
         this.maxBatchSize = options.maxBatchSize ?? DEFAULTS.maxBatchSize;
         this.flushIntervalMs = options.flushIntervalMs ?? DEFAULTS.flushIntervalMs;
         this.maxQueueSize = options.maxQueueSize ?? DEFAULTS.maxQueueSize;
+        // Built once: an empty or blank key is the same as no key, so a
+        // half-configured product does not send `Bearer ` and get a confusing 401.
+        const key = options.ingestKey?.trim();
+        this.headers = {
+            "content-type": "application/json",
+            ...(key ? { authorization: `Bearer ${key}` } : {}),
+        };
         this.onError = options.onError;
         this.setTimeoutImpl = options.setTimeoutImpl ?? setTimeout;
         this.clearTimeoutImpl = options.clearTimeoutImpl ?? clearTimeout;
@@ -77,7 +85,7 @@ export class HttpBatchEventSink {
         try {
             const response = await this.fetchImpl(this.endpoint, {
                 method: "POST",
-                headers: { "content-type": "application/json" },
+                headers: this.headers,
                 body: JSON.stringify({ events: batch }),
                 credentials: "omit",
                 keepalive: true,
