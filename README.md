@@ -9,7 +9,7 @@ Dot 제품·서비스·기기가 공유하는 이벤트 계약. 이벤트 이름
 ## 설치
 
 ```json
-"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.1.0"
+"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.1.1"
 ```
 
 태그로 고정한다. 브랜치(`#dev`, `#main`)를 참조하면 설치할 때마다 내용이 달라진다.
@@ -38,10 +38,14 @@ npm 은 커밋된 것을 그대로 가져간다.
 ## 개발
 
 ```bash
-npm install
+npm run setup   # 개발 도구 설치 (--no-save)
 npm test        # 타입 검사 + 계약 테스트 + dist 최신성
 npm run build   # src → dist
 ```
+
+개발 도구를 `devDependencies` 에 적지 않는다. npm 은 git 의존성의 dev 트리를
+`prepare` 스크립트가 있든 없든 설치하므로, 여기 한 줄이 소비자 전원의 CI 다운로드가
+된다. 측정값: devDependencies 를 두면 53개 패키지, 없애면 **0개**.
 
 ## 계약을 바꿀 때
 

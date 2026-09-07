@@ -1,6 +1,6 @@
 {
   "name": "@dot/event-protocol",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "Vendor-neutral event contracts shared by Dot products, services, and devices.",
@@ -20,15 +20,9 @@
     }
   },
   "scripts": {
+    "setup": "npm install --no-save @types/node@^26.2.0 ajv@^8.20.0 ajv-formats@^3.0.1 typescript@^5.7.2 vitest@^4.1.10",
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "npm run typecheck && vitest run"
-  },
-  "devDependencies": {
-    "@types/node": "^26.2.0",
-    "ajv": "^8.20.0",
-    "ajv-formats": "^3.0.1",
-    "typescript": "^5.7.2",
-    "vitest": "^4.1.10"
   }
 }
