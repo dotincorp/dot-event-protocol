@@ -1,0 +1,41 @@
+{
+  "specversion": "1.0",
+  "id": "event-assessment-0001",
+  "source": "dot://quiz/web",
+  "type": "com.dot.assessment.attempt.completed.v1",
+  "time": "2026-08-11T12:02:00.000Z",
+  "subject": "assessment-attempt/pseudonymous-attempt",
+  "dataschema": "https://schemas.dot/event/v0.1/com.dot.assessment.attempt.completed.v1.schema.json",
+  "dot": {
+    "protocolVersion": "0.1",
+    "eventVersion": 1,
+    "lane": "learning",
+    "privacyClass": "learning_record",
+    "profile": "assessment",
+    "producer": {
+      "app": "dot-quiz",
+      "appVersion": "1.0.0",
+      "platform": "web"
+    },
+    "tenantId": "tenant-01",
+    "sessionId": "session-02"
+  },
+  "data": {
+    "actor": {
+      "type": "student",
+      "id": "pseudonymous-student"
+    },
+    "action": "completed",
+    "object": {
+      "type": "assessment.attempt",
+      "id": "pseudonymous-attempt"
+    },
+    "outcome": {
+      "status": "success",
+      "durationMs": 180000,
+      "count": 10,
+      "score": 80
+    }
+  }
+}
+

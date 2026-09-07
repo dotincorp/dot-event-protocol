@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.dot/event/v0.1/dot-event-envelope.schema.json",
+  "title": "Dot Event Protocol Envelope v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["specversion", "id", "source", "type", "time", "dataschema", "dot", "data"],
+  "properties": {
+    "specversion": { "const": "1.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "source": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "pattern": "^com\\.dot\\.[a-z0-9]+(?:\\.[a-z0-9]+)*\\.v[1-9][0-9]*$"
+    },
+    "time": { "type": "string", "format": "date-time" },
+    "subject": { "type": "string", "minLength": 1 },
+    "dataschema": { "type": "string", "format": "uri" },
+    "dot": { "$ref": "#/$defs/dotMetadata" },
+    "data": { "$ref": "#/$defs/domainEventData" }
+  },
+  "$defs": {
+    "dotMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocolVersion",
+        "eventVersion",
+        "lane",
+        "privacyClass",
+        "profile",
+        "producer"
+      ],
+      "properties": {
+        "protocolVersion": { "const": "0.1" },
+        "eventVersion": { "type": "integer", "minimum": 1 },
+        "lane": {
+          "enum": ["product", "learning", "audit", "operational", "realtime"]
+        },
+        "privacyClass": {
+          "enum": [
+            "non_personal",
+            "anonymous",
+            "pseudonymous",
+            "personal",
+            "learning_record",
+            "sensitive",
+            "security"
+          ]
+        },
+        "profile": {
+          "enum": [
+            "lifecycle",
+            "interaction",
+            "content",
+            "activity",
+            "assessment",
+            "collaboration",
+            "storage",
+            "media",
+            "device",
+            "accessibility",
+            "ai",
+            "operational"
+          ]
+        },
+        "producer": { "$ref": "#/$defs/producer" },
+        "countryCode": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "Configured customer account or tenant country as ISO 3166-1 alpha-2; never inferred from IP or live device location."
+        },
+        "regionCode": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}-[A-Z0-9~]{1,6}$",
+          "description": "Configured customer account or tenant subdivision as ISO 3166-2; never inferred from IP or live device location."
+        },
+        "tenantId": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "correlationId": { "type": "string" },
+        "causationId": { "type": "string" }
+      }
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["app", "appVersion", "platform"],
+      "properties": {
+        "app": { "type": "string", "minLength": 1 },
+        "appVersion": { "type": "string", "minLength": 1 },
+        "platform": {
+          "enum": ["web", "android", "ios", "windows", "macos", "server", "device"]
+        },
+        "deviceModel": { "type": "string" },
+        "osVersion": { "type": "string" }
+      }
+    },
+    "entityRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "minLength": 1 },
+        "id": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "actorRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": ["anonymous", "user", "teacher", "student", "admin", "system", "device"]
+        },
+        "id": { "type": "string" }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "references": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" }
+        },
+        "locale": { "type": "string" },
+        "mode": { "type": "string" },
+        "inputMethod": { "type": "string" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["success", "failure", "cancelled", "partial"] },
+        "durationMs": { "type": "number", "minimum": 0 },
+        "count": { "type": "number" },
+        "score": { "type": "number" },
+        "errorType": { "type": "string" }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "number", "boolean", "null"]
+      }
+    },
+    "domainEventData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action"],
+      "properties": {
+        "actor": { "$ref": "#/$defs/actorRef" },
+        "action": { "type": "string", "minLength": 1 },
+        "object": { "$ref": "#/$defs/entityRef" },
+        "context": { "$ref": "#/$defs/context" },
+        "outcome": { "$ref": "#/$defs/outcome" },
+        "attributes": { "$ref": "#/$defs/attributes" },
+        "details": { "type": "object" }
+      }
+    }
+  }
+}
+

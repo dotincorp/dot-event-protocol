@@ -1,0 +1,29 @@
+{
+  "specversion": "1.0",
+  "id": "invalid-event-0001",
+  "source": "dot://canvas/web",
+  "type": "com.dot.operation.completed.v1",
+  "time": "2026-08-11T12:03:00.000Z",
+  "dataschema": "https://schemas.dot/event/v0.1/com.dot.operation.completed.v1.schema.json",
+  "dot": {
+    "protocolVersion": "0.1",
+    "eventVersion": 1,
+    "lane": "product",
+    "privacyClass": "pseudonymous",
+    "profile": "interaction",
+    "producer": {
+      "app": "dot-canvas",
+      "appVersion": "1.0.0",
+      "platform": "web"
+    }
+  },
+  "data": {
+    "action": "painted",
+    "attributes": {
+      "rawDocument": {
+        "content": "must not be collected"
+      }
+    }
+  }
+}
+

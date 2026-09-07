@@ -1,0 +1,257 @@
+/**
+ * The central feature catalog.
+ *
+ * The usage contract requires features to be registered here before a product
+ * ships events for them, and forbids a product repository from owning its own
+ * list. Until now the registry did not exist, so a `featureKey` was the only
+ * thing a screen could show — and `dot-class.author.lesson-save` is an
+ * identifier, not something a reader recognises. A key answers "which feature";
+ * only a registered label answers "what is it".
+ *
+ * The key stays the stable identity. The label is presentation and may be
+ * rewritten freely; the key may not, because rewriting it breaks every stored
+ * event that carries it.
+ */
+export interface FeatureDefinition {
+  /** Stable `<product>.<surface>.<capability>` identity. */
+  readonly key: string;
+  /** What a person calls this feature. */
+  readonly label: string;
+  /** Producing product. */
+  readonly product: string;
+  /** Work area inside the product — author, report, editor, play. */
+  readonly surface: string;
+  /** What the user completed, in one sentence. */
+  readonly description: string;
+  /** Optional label for summed `outcome.count`, such as pages or affected pins. */
+  readonly quantityLabel?: string;
+  readonly status: "proposed" | "active" | "deprecated" | "retired";
+}
+
+/** Product identity, so a screen does not print `dot-mini-games` at a reader. */
+export const productLabels: Readonly<Record<string, string>> = {
+  "dot-canvas": "Dot Canvas",
+  "dot-class": "Dot Class",
+  "dot-document": "Dot Document",
+  "dot-mini-games": "Dot Mini Games",
+  "dot-travel": "Dot Travel",
+};
+
+export const featureCatalog = {
+  "dot-canvas.editor.command": {
+    key: "dot-canvas.editor.command",
+    label: "편집 명령",
+    product: "dot-canvas",
+    surface: "편집기",
+    description: "캔버스에서 실행한 편집 명령을 완료한다.",
+    quantityLabel: "변경 돌기",
+    status: "active",
+  },
+  "dot-canvas.editor.tool-select": {
+    key: "dot-canvas.editor.tool-select",
+    label: "도구 선택",
+    product: "dot-canvas",
+    surface: "편집기",
+    description: "그리기·도형·점자 등 편집 도구를 선택한다.",
+    status: "active",
+  },
+  "dot-canvas.navigation.menu-open": {
+    key: "dot-canvas.navigation.menu-open",
+    label: "도구 메뉴 열기",
+    product: "dot-canvas",
+    surface: "탐색",
+    description: "도구 그룹 메뉴를 열어 기능을 탐색한다.",
+    status: "active",
+  },
+  "dot-canvas.output.dotpad-print": {
+    key: "dot-canvas.output.dotpad-print",
+    label: "DOT PAD 출력",
+    product: "dot-canvas",
+    surface: "출력",
+    description: "현재 페이지나 발표 화면을 DOT PAD로 출력한다.",
+    quantityLabel: "출력 페이지",
+    status: "active",
+  },
+  "dot-class.author.lesson-save": {
+    key: "dot-class.author.lesson-save",
+    label: "교재 저장",
+    product: "dot-class",
+    surface: "교재 만들기",
+    description: "교사가 만든 교재를 저장해 수업에서 쓸 수 있게 한다.",
+    quantityLabel: "교재 단계",
+    status: "active",
+  },
+  "dot-class.author.template-apply": {
+    key: "dot-class.author.template-apply",
+    label: "서식 적용",
+    product: "dot-class",
+    surface: "교재 만들기",
+    description: "미리 만들어 둔 서식을 교재에 적용한다.",
+    status: "active",
+  },
+  "dot-class.author.bulk-edit": {
+    key: "dot-class.author.bulk-edit",
+    label: "단계 일괄 편집",
+    product: "dot-class",
+    surface: "교재 만들기",
+    description: "여러 교재 단계를 한 번에 변경한다.",
+    quantityLabel: "변경 단계",
+    status: "active",
+  },
+  "dot-class.author.preview": {
+    key: "dot-class.author.preview",
+    label: "교재 미리보기",
+    product: "dot-class",
+    surface: "교재 만들기",
+    description: "학생에게 보일 교재를 미리 확인한다.",
+    status: "active",
+  },
+  "dot-class.class.session-start": {
+    key: "dot-class.class.session-start",
+    label: "수업 시작",
+    product: "dot-class",
+    surface: "수업",
+    description: "교사가 실시간 수업을 시작한다.",
+    status: "active",
+  },
+  "dot-class.student.assignment-open": {
+    key: "dot-class.student.assignment-open",
+    label: "과제 열기",
+    product: "dot-class",
+    surface: "학생",
+    description: "학생이 배정된 과제를 연다.",
+    quantityLabel: "과제 활동",
+    status: "active",
+  },
+  "dot-class.student.assignment-submit": {
+    key: "dot-class.student.assignment-submit",
+    label: "과제 제출",
+    product: "dot-class",
+    surface: "학생",
+    description: "학생이 과제를 완료해 제출한다.",
+    quantityLabel: "제출 활동",
+    status: "active",
+  },
+  "dot-class.student.hand-raise": {
+    key: "dot-class.student.hand-raise",
+    label: "도움 요청",
+    product: "dot-class",
+    surface: "학생",
+    description: "학생이 수업 중 교사에게 도움을 요청한다.",
+    status: "active",
+  },
+  "dot-class.report.csv-export": {
+    key: "dot-class.report.csv-export",
+    label: "CSV 내보내기",
+    product: "dot-class",
+    surface: "보고서",
+    description: "수업 기록을 표 파일로 내려받는다.",
+    status: "active",
+  },
+  "dot-class.class.voice-broadcast": {
+    key: "dot-class.class.voice-broadcast",
+    label: "음성 방송",
+    product: "dot-class",
+    surface: "수업",
+    description: "수업 중 교사의 음성을 학생 기기로 보낸다.",
+    status: "active",
+  },
+  "dot-document.editor.braille-convert": {
+    key: "dot-document.editor.braille-convert",
+    label: "점자 변환",
+    product: "dot-document",
+    surface: "편집기",
+    description: "문서를 점자로 조판한다.",
+    status: "active",
+  },
+  "dot-document.editor.document-export": {
+    key: "dot-document.editor.document-export",
+    label: "문서 내보내기",
+    product: "dot-document",
+    surface: "편집기",
+    description: "조판 결과를 지정한 형식으로 내보낸다.",
+    status: "active",
+  },
+  "dot-mini-games.play.game-round": {
+    key: "dot-mini-games.play.game-round",
+    label: "게임 한 판",
+    product: "dot-mini-games",
+    surface: "플레이",
+    description: "게임 한 판을 끝까지 진행한다.",
+    status: "active",
+  },
+  "dot-mini-games.device.dotpad-connection": {
+    key: "dot-mini-games.device.dotpad-connection",
+    label: "닷패드 연결",
+    product: "dot-mini-games",
+    surface: "장치",
+    description: "닷패드와 연결하거나 연결이 끊긴다.",
+    status: "active",
+  },
+  "dot-mini-games.shell.accessibility-mode": {
+    key: "dot-mini-games.shell.accessibility-mode",
+    label: "접근성 모드",
+    product: "dot-mini-games",
+    surface: "셸",
+    description: "고대비 같은 화면 모드를 켜고 끈다.",
+    status: "active",
+  },
+  "dot-travel.map.place-explore": {
+    key: "dot-travel.map.place-explore",
+    label: "장소 탐험",
+    product: "dot-travel",
+    surface: "지도",
+    description: "관광지 한 곳을 촉각 지도로 탐험한다.",
+    status: "active",
+  },
+  "dot-travel.map.world-explore": {
+    key: "dot-travel.map.world-explore",
+    label: "세계 지도 탐험",
+    product: "dot-travel",
+    surface: "지도",
+    description: "세계 지도 탐험 모드를 이용한다.",
+    status: "active",
+  },
+  "dot-travel.play.treasure-quiz": {
+    key: "dot-travel.play.treasure-quiz",
+    label: "보물찾기 퀴즈",
+    product: "dot-travel",
+    surface: "플레이",
+    description: "관광지 보물찾기 퀴즈를 진행한다.",
+    quantityLabel: "탐색 장소",
+    status: "active",
+  },
+  "dot-travel.audio.place-story": {
+    key: "dot-travel.audio.place-story",
+    label: "장소 이야기 듣기",
+    product: "dot-travel",
+    surface: "오디오",
+    description: "선택한 장소의 해설을 재생한다.",
+    status: "active",
+  },
+  "dot-travel.device.dotpad-connection": {
+    key: "dot-travel.device.dotpad-connection",
+    label: "닷패드 연결",
+    product: "dot-travel",
+    surface: "장치",
+    description: "닷패드와 연결하거나 연결이 끊긴다.",
+    status: "active",
+  },
+} as const satisfies Readonly<Record<string, FeatureDefinition>>;
+
+export type FeatureKey = keyof typeof featureCatalog;
+
+export function getFeatureDefinition(key: string): FeatureDefinition | undefined {
+  return (featureCatalog as Readonly<Record<string, FeatureDefinition>>)[key];
+}
+
+/**
+ * A product's name, or the raw id when it is not registered.
+ *
+ * Falling back to the id keeps an unregistered product visible instead of
+ * dropping it off the screen — an unknown product is a registration gap worth
+ * seeing, not something to hide.
+ */
+export function productLabel(app: string): string {
+  return productLabels[app] ?? app;
+}
