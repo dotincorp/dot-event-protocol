@@ -75,6 +75,7 @@ npm run build   # src → dist
 
 ## 문서
 
+- `docs/CONSUMER-GUIDE.md` — 설치부터 첫 이벤트까지, 가져다 쓰는 쪽의 정본
 - `docs/DOT-EVENT-PROTOCOL.md` — 봉투 구조와 규칙
 - `docs/EVENT-CATALOG.md` — 등록된 이벤트
 - `docs/PRIVACY-AND-ROUTING.md` — lane 과 개인정보 등급
