@@ -148,6 +148,131 @@ export declare const featureCatalog: {
         readonly description: "수업 중 교사의 음성을 학생 기기로 보낸다.";
         readonly status: "active";
     };
+    readonly "dot-cloud.drive.file-open": {
+        readonly key: "dot-cloud.drive.file-open";
+        readonly label: "파일 열기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "클라우드에 있는 파일을 연다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.file-upload": {
+        readonly key: "dot-cloud.drive.file-upload";
+        readonly label: "파일 올리기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "내 기기의 파일을 클라우드에 올린다.";
+        readonly quantityLabel: "올린 파일";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.file-download": {
+        readonly key: "dot-cloud.drive.file-download";
+        readonly label: "파일 내려받기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "클라우드의 파일을 내 기기로 내려받는다.";
+        readonly quantityLabel: "내려받은 파일";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.folder-create": {
+        readonly key: "dot-cloud.drive.folder-create";
+        readonly label: "폴더 만들기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "파일을 정리할 폴더를 만든다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.file-rename": {
+        readonly key: "dot-cloud.drive.file-rename";
+        readonly label: "이름 바꾸기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "파일이나 폴더의 이름을 바꾼다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.file-move": {
+        readonly key: "dot-cloud.drive.file-move";
+        readonly label: "파일 옮기기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "파일이나 폴더를 다른 위치로 옮긴다.";
+        readonly quantityLabel: "옮긴 파일";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.file-delete": {
+        readonly key: "dot-cloud.drive.file-delete";
+        readonly label: "휴지통으로 보내기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "파일이나 폴더를 휴지통으로 보낸다.";
+        readonly quantityLabel: "버린 파일";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.file-share": {
+        readonly key: "dot-cloud.drive.file-share";
+        readonly label: "파일 공유";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "파일이나 폴더를 다른 사용자와 공유한다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.search": {
+        readonly key: "dot-cloud.drive.search";
+        readonly label: "검색";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "이름이나 태그로 파일을 찾는다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.favorite-add": {
+        readonly key: "dot-cloud.drive.favorite-add";
+        readonly label: "즐겨찾기 추가";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "자주 쓰는 파일을 즐겨찾기에 넣는다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.collection-create": {
+        readonly key: "dot-cloud.drive.collection-create";
+        readonly label: "컬렉션 만들기";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "여러 파일을 묶어 보는 컬렉션을 만든다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.drive.tag-edit": {
+        readonly key: "dot-cloud.drive.tag-edit";
+        readonly label: "태그 편집";
+        readonly product: "dot-cloud";
+        readonly surface: "드라이브";
+        readonly description: "파일에 붙은 분류 태그를 고친다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.comms.chat-send": {
+        readonly key: "dot-cloud.comms.chat-send";
+        readonly label: "대화 보내기";
+        readonly product: "dot-cloud";
+        readonly surface: "소통";
+        readonly description: "친구나 그룹에 대화를 보낸다.";
+        readonly quantityLabel: "보낸 대화";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.shell.accessibility-mode": {
+        readonly key: "dot-cloud.shell.accessibility-mode";
+        readonly label: "접근성 모드";
+        readonly product: "dot-cloud";
+        readonly surface: "셸";
+        readonly description: "고대비 같은 화면 모드를 켜고 끈다.";
+        readonly status: "active";
+    };
+    readonly "dot-cloud.shell.language-change": {
+        readonly key: "dot-cloud.shell.language-change";
+        readonly label: "언어 변경";
+        readonly product: "dot-cloud";
+        readonly surface: "셸";
+        readonly description: "화면에 쓰는 언어를 바꾼다.";
+        readonly status: "active";
+    };
     readonly "dot-document.editor.braille-convert": {
         readonly key: "dot-document.editor.braille-convert";
         readonly label: "점자 변환";
@@ -162,6 +287,79 @@ export declare const featureCatalog: {
         readonly product: "dot-document";
         readonly surface: "편집기";
         readonly description: "조판 결과를 지정한 형식으로 내보낸다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.shell.app-open": {
+        readonly key: "dot-hub.shell.app-open";
+        readonly label: "앱 열기";
+        readonly product: "dot-hub";
+        readonly surface: "셸";
+        readonly description: "허브에서 위성앱을 열어 실행한다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.account.sign-in": {
+        readonly key: "dot-hub.account.sign-in";
+        readonly label: "로그인";
+        readonly product: "dot-hub";
+        readonly surface: "계정";
+        readonly description: "허브 계정으로 로그인한다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.comms.chat-send": {
+        readonly key: "dot-hub.comms.chat-send";
+        readonly label: "대화 보내기";
+        readonly product: "dot-hub";
+        readonly surface: "소통";
+        readonly description: "친구나 그룹에 대화를 보낸다.";
+        readonly quantityLabel: "보낸 대화";
+        readonly status: "active";
+    };
+    readonly "dot-hub.comms.friend-add": {
+        readonly key: "dot-hub.comms.friend-add";
+        readonly label: "친구 추가";
+        readonly product: "dot-hub";
+        readonly surface: "소통";
+        readonly description: "다른 사용자를 친구로 추가한다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.comms.group-create": {
+        readonly key: "dot-hub.comms.group-create";
+        readonly label: "그룹 만들기";
+        readonly product: "dot-hub";
+        readonly surface: "소통";
+        readonly description: "여러 명이 함께 쓰는 대화 그룹을 만든다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.shell.settings-change": {
+        readonly key: "dot-hub.shell.settings-change";
+        readonly label: "설정 변경";
+        readonly product: "dot-hub";
+        readonly surface: "셸";
+        readonly description: "표시와 소리 같은 사용 환경 설정을 바꾼다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.shell.accessibility-mode": {
+        readonly key: "dot-hub.shell.accessibility-mode";
+        readonly label: "접근성 모드";
+        readonly product: "dot-hub";
+        readonly surface: "셸";
+        readonly description: "고대비 같은 화면 모드를 켜고 끈다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.shell.language-change": {
+        readonly key: "dot-hub.shell.language-change";
+        readonly label: "언어 변경";
+        readonly product: "dot-hub";
+        readonly surface: "셸";
+        readonly description: "화면에 쓰는 언어를 바꾼다.";
+        readonly status: "active";
+    };
+    readonly "dot-hub.device.dotpad-connection": {
+        readonly key: "dot-hub.device.dotpad-connection";
+        readonly label: "닷패드 연결";
+        readonly product: "dot-hub";
+        readonly surface: "장치";
+        readonly description: "닷패드와 연결하거나 연결이 끊긴다.";
         readonly status: "active";
     };
     readonly "dot-mini-games.play.game-round": {
@@ -186,6 +384,233 @@ export declare const featureCatalog: {
         readonly product: "dot-mini-games";
         readonly surface: "셸";
         readonly description: "고대비 같은 화면 모드를 켜고 끈다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.learn.score-read": {
+        readonly key: "dot-music.learn.score-read";
+        readonly label: "악보 읽기";
+        readonly product: "dot-music";
+        readonly surface: "배우기";
+        readonly description: "점자 악보를 열어 읽는다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.learn.chord-practice": {
+        readonly key: "dot-music.learn.chord-practice";
+        readonly label: "화음 연습";
+        readonly product: "dot-music";
+        readonly surface: "배우기";
+        readonly description: "화음을 듣고 손으로 확인하며 연습한다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.make.melody-station": {
+        readonly key: "dot-music.make.melody-station";
+        readonly label: "멜로디 만들기";
+        readonly product: "dot-music";
+        readonly surface: "만들기";
+        readonly description: "음을 이어 붙여 멜로디를 만든다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.make.loop-station": {
+        readonly key: "dot-music.make.loop-station";
+        readonly label: "루프 연주";
+        readonly product: "dot-music";
+        readonly surface: "만들기";
+        readonly description: "반복되는 소리를 겹쳐 연주한다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.make.ensemble": {
+        readonly key: "dot-music.make.ensemble";
+        readonly label: "합주";
+        readonly product: "dot-music";
+        readonly surface: "만들기";
+        readonly description: "여러 악기 소리를 함께 울리는 합주를 구성한다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.make.work-save": {
+        readonly key: "dot-music.make.work-save";
+        readonly label: "작업물 저장";
+        readonly product: "dot-music";
+        readonly surface: "만들기";
+        readonly description: "만든 멜로디나 합주를 클라우드에 저장한다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.play.memory-game": {
+        readonly key: "dot-music.play.memory-game";
+        readonly label: "멜로디 기억 놀이";
+        readonly product: "dot-music";
+        readonly surface: "놀이";
+        readonly description: "들려준 멜로디를 기억해 따라 누르는 놀이를 한다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.shell.accessibility-mode": {
+        readonly key: "dot-music.shell.accessibility-mode";
+        readonly label: "접근성 모드";
+        readonly product: "dot-music";
+        readonly surface: "셸";
+        readonly description: "고대비 같은 화면 모드를 켜고 끈다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.shell.language-change": {
+        readonly key: "dot-music.shell.language-change";
+        readonly label: "언어 변경";
+        readonly product: "dot-music";
+        readonly surface: "셸";
+        readonly description: "화면에 쓰는 언어를 바꾼다.";
+        readonly status: "active";
+    };
+    readonly "dot-music.device.dotpad-connection": {
+        readonly key: "dot-music.device.dotpad-connection";
+        readonly label: "닷패드 연결";
+        readonly product: "dot-music";
+        readonly surface: "장치";
+        readonly description: "닷패드와 연결하거나 연결이 끊긴다.";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.play.single-round": {
+        readonly key: "dot-quiz.play.single-round";
+        readonly label: "혼자 풀기 한 판";
+        readonly product: "dot-quiz";
+        readonly surface: "플레이";
+        readonly description: "혼자 퀴즈 한 판을 끝까지 진행한다.";
+        readonly quantityLabel: "푼 문항";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.play.multi-round": {
+        readonly key: "dot-quiz.play.multi-round";
+        readonly label: "함께 풀기 한 판";
+        readonly product: "dot-quiz";
+        readonly surface: "플레이";
+        readonly description: "여러 명이 같은 문제를 푸는 퀴즈 한 판을 진행한다.";
+        readonly quantityLabel: "푼 문항";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.room.join": {
+        readonly key: "dot-quiz.room.join";
+        readonly label: "방 참여";
+        readonly product: "dot-quiz";
+        readonly surface: "방";
+        readonly description: "PIN으로 함께하기 방에 들어간다.";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.room.invite": {
+        readonly key: "dot-quiz.room.invite";
+        readonly label: "친구 초대";
+        readonly product: "dot-quiz";
+        readonly surface: "방";
+        readonly description: "친구를 함께하기 방으로 초대한다.";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.author.quiz-save": {
+        readonly key: "dot-quiz.author.quiz-save";
+        readonly label: "문제 저장";
+        readonly product: "dot-quiz";
+        readonly surface: "문제 만들기";
+        readonly description: "만든 문제를 저장해 다시 쓸 수 있게 한다.";
+        readonly quantityLabel: "저장 문항";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.author.shape-draw": {
+        readonly key: "dot-quiz.author.shape-draw";
+        readonly label: "도형 그리기";
+        readonly product: "dot-quiz";
+        readonly surface: "문제 만들기";
+        readonly description: "문제에 넣을 촉각 도형을 그린다.";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.shell.accessibility-mode": {
+        readonly key: "dot-quiz.shell.accessibility-mode";
+        readonly label: "접근성 모드";
+        readonly product: "dot-quiz";
+        readonly surface: "셸";
+        readonly description: "고대비 같은 화면 모드를 켜고 끈다.";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.shell.language-change": {
+        readonly key: "dot-quiz.shell.language-change";
+        readonly label: "언어 변경";
+        readonly product: "dot-quiz";
+        readonly surface: "셸";
+        readonly description: "화면에 쓰는 언어를 바꾼다.";
+        readonly status: "active";
+    };
+    readonly "dot-quiz.device.dotpad-connection": {
+        readonly key: "dot-quiz.device.dotpad-connection";
+        readonly label: "닷패드 연결";
+        readonly product: "dot-quiz";
+        readonly surface: "장치";
+        readonly description: "닷패드와 연결하거나 연결이 끊긴다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.explore.galaxy": {
+        readonly key: "dot-space.explore.galaxy";
+        readonly label: "은하 탐험";
+        readonly product: "dot-space";
+        readonly surface: "탐험";
+        readonly description: "은하의 형태를 촉각으로 훑어 본다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.explore.star": {
+        readonly key: "dot-space.explore.star";
+        readonly label: "항성 탐험";
+        readonly product: "dot-space";
+        readonly surface: "탐험";
+        readonly description: "개별 항성의 크기와 온도를 비교한다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.explore.constellation": {
+        readonly key: "dot-space.explore.constellation";
+        readonly label: "별자리 탐험";
+        readonly product: "dot-space";
+        readonly surface: "탐험";
+        readonly description: "별을 잇는 선을 따라 별자리를 짚는다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.explore.planet-system": {
+        readonly key: "dot-space.explore.planet-system";
+        readonly label: "행성계 탐험";
+        readonly product: "dot-space";
+        readonly surface: "탐험";
+        readonly description: "태양계와 외계 행성계를 위에서 본 배치로 살핀다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.explore.night-sky": {
+        readonly key: "dot-space.explore.night-sky";
+        readonly label: "지금 하늘 보기";
+        readonly product: "dot-space";
+        readonly surface: "탐험";
+        readonly description: "지구에서 지금 보이는 하늘을 확인한다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.audio.space-sound": {
+        readonly key: "dot-space.audio.space-sound";
+        readonly label: "우주의 소리 듣기";
+        readonly product: "dot-space";
+        readonly surface: "오디오";
+        readonly description: "펄서와 공명 사슬 같은 우주의 소리를 듣는다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.shell.accessibility-mode": {
+        readonly key: "dot-space.shell.accessibility-mode";
+        readonly label: "접근성 모드";
+        readonly product: "dot-space";
+        readonly surface: "셸";
+        readonly description: "고대비 같은 화면 모드를 켜고 끈다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.shell.language-change": {
+        readonly key: "dot-space.shell.language-change";
+        readonly label: "언어 변경";
+        readonly product: "dot-space";
+        readonly surface: "셸";
+        readonly description: "화면에 쓰는 언어를 바꾼다.";
+        readonly status: "active";
+    };
+    readonly "dot-space.device.dotpad-connection": {
+        readonly key: "dot-space.device.dotpad-connection";
+        readonly label: "닷패드 연결";
+        readonly product: "dot-space";
+        readonly surface: "장치";
+        readonly description: "닷패드와 연결하거나 연결이 끊긴다.";
         readonly status: "active";
     };
     readonly "dot-travel.map.place-explore": {

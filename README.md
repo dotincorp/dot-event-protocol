@@ -9,7 +9,7 @@ Dot 제품·서비스·기기가 공유하는 이벤트 계약. 이벤트 이름
 ## 설치
 
 ```json
-"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.2.0"
+"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.3.0"
 ```
 
 태그로 고정한다. 브랜치(`#dev`, `#main`)를 참조하면 설치할 때마다 내용이 달라진다.
