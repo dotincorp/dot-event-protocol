@@ -12,7 +12,8 @@ Dot 제품·서비스·기기가 공유하는 이벤트 계약. 이벤트 이름
 "@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.3.1"
 ```
 
-태그로 고정한다. 브랜치(`#dev`, `#main`)를 참조하면 설치할 때마다 내용이 달라진다.
+태그로 고정하거나 `#semver:^0.3.1` 범위를 쓴다. 브랜치(`#dev`, `#main`)를 참조하면 설치할
+때마다 내용이 달라진다. 범위와 갱신 방법은 `docs/CONSUMER-GUIDE.md` §1에 있다.
 비공개 저장소이므로 설치 환경에 GitHub 접근 권한이 필요하다.
 
 ```js

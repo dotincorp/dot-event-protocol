@@ -9,8 +9,18 @@
 "@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.3.1"
 ```
 
-- **태그로 고정한다.** 브랜치(`#main`, `#dev`)를 가리키면 설치할 때마다 내용이 달라진다.
-  범위 지정(`^`, `*`)은 git 의존성에 semver 해석이 없어 아무 의미가 없다.
+- **브랜치(`#main`, `#dev`)를 가리키지 않는다.** 설치할 때마다 내용이 달라진다.
+- 고정된 태그(`#v0.3.1`)나 **`#semver:` 범위** 둘 중 하나를 쓴다. `#^0.3.1` 처럼 접두사 없이 적은
+  범위는 그런 이름의 태그를 찾다가 실패한다. npm이 해석하는 형태는 하나뿐이다.
+
+  ```json
+  "@dot/event-protocol": "github:dotincorp/dot-event-protocol#semver:^0.3.1"
+  ```
+
+  0.x에서 `^`는 패치만 허용한다(`>=0.3.1 <0.4.0`). 버그 수정은 `npm update @dot/event-protocol`
+  로 받고, 계약이 바뀌는 마이너 올림은 그대로 손으로 올린다 — 새 이벤트나 기능 키가 모르는 새
+  들어오지 않는다는 원칙은 이 쪽이 오히려 또렷해진다. 잠금 파일에는 어느 쪽이든 태그가 아니라
+  커밋 SHA가 박히므로 재현성은 같다.
 - 비공개 저장소라 설치 환경에 GitHub 접근 권한이 필요하다. SSH를 쓰면
   `git+ssh://git@github.com/dotincorp/dot-event-protocol.git#v0.3.1`, CI에는 deploy key나 PAT.
 - **런타임 의존성이 0개다.** 설치해도 다른 패키지가 따라오지 않고, `prepare` 스크립트가 없어
