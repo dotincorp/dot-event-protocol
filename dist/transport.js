@@ -32,8 +32,13 @@ export class HttpBatchEventSink {
             ...(key ? { authorization: `Bearer ${key}` } : {}),
         };
         this.onError = options.onError;
-        this.setTimeoutImpl = options.setTimeoutImpl ?? setTimeout;
-        this.clearTimeoutImpl = options.clearTimeoutImpl ?? clearTimeout;
+        // Bound to the global, exactly like fetch above. A browser brand-checks its
+        // timer functions: called with the sink as receiver they throw "Illegal
+        // invocation", which killed schedule() and with it every flush that a full
+        // batch did not force. Node's timers do not check, so the failure appeared
+        // only where it mattered and never in a test.
+        this.setTimeoutImpl = options.setTimeoutImpl ?? globalThis.setTimeout.bind(globalThis);
+        this.clearTimeoutImpl = options.clearTimeoutImpl ?? globalThis.clearTimeout.bind(globalThis);
     }
     /** How many events were dropped because the queue was full. */
     get dropped() {

@@ -30,6 +30,42 @@ function okFetch() {
 }
 
 describe("reference HTTP transport", () => {
+  /**
+   * A browser refuses a borrowed timer.
+   *
+   * `setTimeout` and `clearTimeout` are brand-checked there: called with
+   * anything but the window as receiver they throw `Illegal invocation`. Node's
+   * do not, which is why a sink that stored them unbound passed every test here
+   * and delivered nothing in a deployed browser. The stubs below put that check
+   * back so this file can see it.
+   */
+  it("uses global timers the way a browser requires", async () => {
+    const realSetTimeout = globalThis.setTimeout;
+    const realClearTimeout = globalThis.clearTimeout;
+    globalThis.setTimeout = function (this: unknown, ...args: Parameters<typeof setTimeout>) {
+      if (this !== globalThis) throw new TypeError("Illegal invocation");
+      return realSetTimeout(...args);
+    } as typeof setTimeout;
+    globalThis.clearTimeout = function (this: unknown, ...args: Parameters<typeof clearTimeout>) {
+      if (this !== globalThis) throw new TypeError("Illegal invocation");
+      realClearTimeout(...args);
+    } as typeof clearTimeout;
+
+    try {
+      const { impl, calls } = okFetch();
+      const sink = new HttpBatchEventSink({ endpoint: "http://x/v1/events", fetchImpl: impl });
+
+      // emit() schedules; flush() clears. Both paths touch a global timer.
+      expect(() => sink.emit(event("a"))).not.toThrow();
+      await sink.flush();
+
+      expect(calls).toHaveLength(1);
+    } finally {
+      globalThis.setTimeout = realSetTimeout;
+      globalThis.clearTimeout = realClearTimeout;
+    }
+  });
+
   it("batches instead of one request per event", async () => {
     const { impl, calls } = okFetch();
     const sink = new HttpBatchEventSink({ endpoint: "http://x/v1/events", fetchImpl: impl, maxBatchSize: 3 });

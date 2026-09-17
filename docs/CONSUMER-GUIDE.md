@@ -6,13 +6,13 @@
 ## 1. 설치
 
 ```json
-"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.3.0"
+"@dot/event-protocol": "github:dotincorp/dot-event-protocol#v0.3.1"
 ```
 
 - **태그로 고정한다.** 브랜치(`#main`, `#dev`)를 가리키면 설치할 때마다 내용이 달라진다.
   범위 지정(`^`, `*`)은 git 의존성에 semver 해석이 없어 아무 의미가 없다.
 - 비공개 저장소라 설치 환경에 GitHub 접근 권한이 필요하다. SSH를 쓰면
-  `git+ssh://git@github.com/dotincorp/dot-event-protocol.git#v0.3.0`, CI에는 deploy key나 PAT.
+  `git+ssh://git@github.com/dotincorp/dot-event-protocol.git#v0.3.1`, CI에는 deploy key나 PAT.
 - **런타임 의존성이 0개다.** 설치해도 다른 패키지가 따라오지 않고, `prepare` 스크립트가 없어
   컴파일러도 돌지 않는다. npm은 커밋된 `dist/`를 그대로 가져간다.
 
